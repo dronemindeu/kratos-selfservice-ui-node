@@ -37,18 +37,26 @@ export const createWelcomeRoute: RouteCreator =
         selectedLink: "welcome",
       }),
       projectInfoText: Typography({
-        children: `You are on the AutrikOS Point Cloud Viewing platform.`,
+        children: `You are on the AutrikOS platform.`,
         type: "regular",
         size: "small",
         color: "foregroundMuted",
       }),
       concepts: [
+        // CardGradient({
+        //   heading: "Data Visualisation",
+        //   content:
+        //     "Browse through all point clouds uploaded on the server.",
+        //   action:
+        //     "https://autrik.com/api/data/",
+        //   target: "_blank",
+        // }),
         CardGradient({
-          heading: "Projects",
+          heading: "Video Streaming",
           content:
-            "Browse through all point clouds uploaded on the server.",
+            "Share your device's Video Stream to the AutrikOS Dashboard.",
           action:
-            "https://autrik-dev.de/api/data/",
+            "https://videoshare.autrik.com/",
           target: "_blank",
         }),
         // CardGradient({

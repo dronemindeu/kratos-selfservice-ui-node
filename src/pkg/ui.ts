@@ -49,8 +49,8 @@ export const navigationMenu = ({
         links: links,
       },
       {
-        title: "Default User Interfaces",
-        titleIcon: "circle-question",
+        title: "Authentication actions",
+        // titleIcon: "circle-question",
         links: [
           {
             name: "Sign In",
@@ -70,24 +70,24 @@ export const navigationMenu = ({
             testId: "registration",
             target: "_blank",
           },
-          {
-            name: "Account Recovery",
-            href: "recovery",
-            iconLeft: "user-xmark",
-            iconRight: "up-right-from-square",
-            disabled: Boolean(session),
-            testId: "recovery",
-            target: "_blank",
-          },
-          {
-            name: "Account Verification",
-            href: "verification",
-            iconLeft: "user-check",
-            iconRight: "up-right-from-square",
-            disabled: false,
-            testId: "verification",
-            target: "_blank",
-          },
+          // {
+          //   name: "Account Recovery",
+          //   href: "recovery",
+          //   iconLeft: "user-xmark",
+          //   iconRight: "up-right-from-square",
+          //   disabled: Boolean(session),
+          //   testId: "recovery",
+          //   target: "_blank",
+          // },
+          // {
+          //   name: "Account Verification",
+          //   href: "verification",
+          //   iconLeft: "user-check",
+          //   iconRight: "up-right-from-square",
+          //   disabled: false,
+          //   testId: "verification",
+          //   target: "_blank",
+          // },
           {
             name: "Account Settings",
             href: "settings",

@@ -10,13 +10,13 @@ import { logger, middleware as middlewareLogger } from "./pkg/logger"
 import {
   register404Route,
   register500Route,
-  registerConsentRoute,
+  // registerConsentRoute,
   registerErrorRoute,
   registerHealthRoute,
   registerLoginRoute,
   registerRecoveryRoute,
   registerRegistrationRoute,
-  registerSessionsRoute,
+  // registerSessionsRoute,
   registerSettingsRoute,
   registerStaticRoutes,
   registerVerificationRoute,
@@ -90,16 +90,16 @@ registerLoginRoute(router)
 registerRecoveryRoute(router)
 registerRegistrationRoute(router)
 registerSettingsRoute(router)
-registerVerificationRoute(router)
-registerSessionsRoute(router)
+// registerVerificationRoute(router)
+//registerSessionsRoute(router)
 registerWelcomeRoute(router)
 registerErrorRoute(router)
 
 // all routes registered under the /consent path are protected by CSRF
-router.use("/consent", doubleCsrfProtection)
-router.use("/consent", csrfErrorHandler(invalidCsrfTokenError))
+//router.use("/consent", doubleCsrfProtection)
+//router.use("/consent", csrfErrorHandler(invalidCsrfTokenError))
 
-registerConsentRoute(router)
+//registerConsentRoute(router)
 registerLogoutRoute(router)
 
 router.get("/", (req: Request, res: Response) => {

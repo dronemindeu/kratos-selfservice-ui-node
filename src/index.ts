@@ -10,13 +10,13 @@ import { logger, middleware as middlewareLogger } from "./pkg/logger"
 import {
   register404Route,
   register500Route,
-  registerConsentRoute,
+  // registerConsentRoute,
   registerErrorRoute,
   registerHealthRoute,
   registerLoginRoute,
   registerRecoveryRoute,
   registerRegistrationRoute,
-  registerSessionsRoute,
+  // registerSessionsRoute,
   registerSettingsRoute,
   registerStaticRoutes,
   registerVerificationRoute,
@@ -91,19 +91,19 @@ registerRecoveryRoute(router)
 registerRegistrationRoute(router)
 registerSettingsRoute(router)
 registerVerificationRoute(router)
-registerSessionsRoute(router)
+//registerSessionsRoute(router)
 registerWelcomeRoute(router)
 registerErrorRoute(router)
 
 // all routes registered under the /consent path are protected by CSRF
-router.use("/consent", doubleCsrfProtection)
-router.use("/consent", csrfErrorHandler(invalidCsrfTokenError))
-registerConsentRoute(router)
+// router.use("/consent", doubleCsrfProtection)
+// router.use("/consent", csrfErrorHandler(invalidCsrfTokenError))
+// registerConsentRoute(router)
 
 // all routes registered under the /logout path are protected by CSRF
-router.use("/logout", doubleCsrfProtection)
-router.use("/logout", csrfErrorHandler(invalidCsrfTokenError))
-registerLogoutRoute(router)
+// router.use("/logout", doubleCsrfProtection)
+// router.use("/logout", csrfErrorHandler(invalidCsrfTokenError))
+// registerLogoutRoute(router)
 
 router.get("/", (req: Request, res: Response) => {
   res.redirect(303, "welcome")

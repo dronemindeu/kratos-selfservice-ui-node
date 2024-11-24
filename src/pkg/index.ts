@@ -132,7 +132,7 @@ export const handlebarsHelpers: UnknownObject = {
   divider: (fullWidth: boolean, className?: string) =>
     Divider({ className, fullWidth }),
   buttonLink: (text: string) =>
-    ButtonLink({ href: "https://www.ory.sh/", children: text }),
+    ButtonLink({ href: "https://www.autrik.com/", children: text }),
   typography: (text: string, size: any, color: any, type?: any) =>
     Typography({
       children: text,
@@ -153,11 +153,11 @@ export const handlebarsHelpers: UnknownObject = {
       children: text,
     })
   },
-  oryBranding: () =>
-    Typography({
-      children: `Protected by `,
-      type: "regular",
-      size: "tiny",
-      color: "foregroundSubtle",
-    }),
+  // oryBranding: () =>
+  //   Typography({
+  //     children: `Protected by `,
+  //     type: "regular",
+  //     size: "tiny",
+  //     color: "foregroundSubtle",
+  //   }),
 }

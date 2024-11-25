@@ -11,12 +11,10 @@ import {
 import { navigationMenu } from "../pkg/ui"
 import { CardGradient, Typography } from "@ory/elements-markup"
 
-const videoShareURL = process.env.VIDEO_SHARE_URL ?? "https://videoshare.autrik.com/"
-const autrikosAssetsURL = process.env.AUTRIKOS_ASSETS_URL ?? "https://autrik.com/api/public/assets/"
-const autrikosDocsURL = process.env.AUTRIKOS_DOCS_URL ?? "https://autrik.com/docs/"
-// export VIDEO_SHARE_URL="https://videoshare.autrik-staging.com/"
-// export AUTRIKOS_ASSETS_URL="https://autrik-staging.com/api/public/assets/"
-// export AUTRIKOS_DOCS_URL="https://autrik-staging.com/docs/"
+const autrikVideoShareURL = process.env.AUTRIK_VIDEO_SHARE_URL ?? "https://videoshare.autrik.com/"
+const autrikAssetsURL = process.env.AUTRIK_ASSETS_URL ?? "https://autrik.com/api/public/assets/"
+const autrikDocsURL = process.env.AUTRIK_DOCS_URL ?? "https://autrik.com/docs/"
+
 const getConceptsByRole = () => {
   let concepts = [
     CardGradient({
@@ -24,7 +22,7 @@ const getConceptsByRole = () => {
       content:
         "Share your device's Video Stream to the AutrikOS Dashboard.",
       action:
-        videoShareURL,
+        autrikVideoShareURL,
       target: "_blank",
     }),
   ]
@@ -34,7 +32,7 @@ const getConceptsByRole = () => {
       content:
         "Download the AutrikOS assets.",
       action:
-        autrikosAssetsURL,
+        autrikAssetsURL,
       target: "_blank",
     }),
   )
@@ -44,7 +42,7 @@ const getConceptsByRole = () => {
       content:
         "Read the AutrikOS documentation.",
       action:
-        autrikosDocsURL,
+        autrikDocsURL,
       target: "_blank",
     }),
   )

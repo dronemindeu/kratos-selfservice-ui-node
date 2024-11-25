@@ -23,8 +23,7 @@ export const getUrlForFlow = (
   flow: string,
   query?: URLSearchParams,
 ) =>
-  `${removeTrailingSlash(base)}/self-service/${flow}/browser${
-    query ? `?${query.toString()}` : ""
+  `${removeTrailingSlash(base)}/self-service/${flow}/browser${query ? `?${query.toString()}` : ""
   }`
 
 export const defaultConfig: RouteOptionsCreator = () => {
@@ -35,8 +34,8 @@ export const defaultConfig: RouteOptionsCreator = () => {
     faviconType: "image/png",
     isOAuthConsentRouteEnabled: () =>
       (process.env.HYDRA_ADMIN_URL || process.env.ORY_SDK_URL) &&
-      process.env.CSRF_COOKIE_SECRET &&
-      process.env.CSRF_COOKIE_NAME
+        process.env.CSRF_COOKIE_SECRET &&
+        process.env.CSRF_COOKIE_NAME
         ? true
         : false,
     shouldSkipConsent: (challenge) => {
@@ -83,35 +82,38 @@ const isErrorAuthenticatorAssuranceLevel = (
 // or 403 error code.
 export const redirectOnSoftError =
   (res: Response, next: NextFunction, redirectTo: string) =>
-  (err: AxiosError) => {
-    if (!err.response) {
-      next(err)
-      return
-    }
-
-    if (
-      err.response.status === 404 ||
-      err.response.status === 410 ||
-      err.response.status === 403
-    ) {
-      // in some cases Kratos will require us to redirect to a different page when the session_aal2_required
-      // for example, when recovery redirects us to settings
-      // but settings requires us to redirect to login?aal=aal2
-      const authenticatorAssuranceLevelError = err.response.data as unknown
-      if (
-        isErrorAuthenticatorAssuranceLevel(authenticatorAssuranceLevelError)
-      ) {
-        res.redirect(
-          authenticatorAssuranceLevelError.redirect_browser_to || redirectTo,
-        )
+    (err: AxiosError) => {
+      if (!err.response) {
+        next(err)
         return
       }
-      res.redirect(`${redirectTo}`)
-      return
+
+      if (
+        err.response.status === 404 ||
+        err.response.status === 410 ||
+        err.response.status === 403
+      ) {
+        // in some cases Kratos will require us to redirect to a different page when the session_aal2_required
+        // for example, when recovery redirects us to settings
+        // but settings requires us to redirect to login?aal=aal2
+        const authenticatorAssuranceLevelError = err.response.data as unknown
+        if (
+          isErrorAuthenticatorAssuranceLevel(authenticatorAssuranceLevelError)
+        ) {
+          res.redirect(
+            authenticatorAssuranceLevelError.redirect_browser_to || redirectTo,
+          )
+          return
+        }
+        res.redirect(`${redirectTo}`)
+        return
+      }
+
+      next(err)
     }
 
-    next(err)
-  }
+// its not used anywhere atm
+const baseApiURL = process.env.AUTRIK_BASE_URL || "https://www.autrik.com/"
 
 export const handlebarsHelpers: UnknownObject = {
   jsonPretty: (context: any) => JSON.stringify(context, null, 2),
@@ -132,7 +134,7 @@ export const handlebarsHelpers: UnknownObject = {
   divider: (fullWidth: boolean, className?: string) =>
     Divider({ className, fullWidth }),
   buttonLink: (text: string) =>
-    ButtonLink({ href: "https://www.autrik.com/", children: text }),
+    ButtonLink({ href: baseApiURL, children: text }),
   typography: (text: string, size: any, color: any, type?: any) =>
     Typography({
       children: text,

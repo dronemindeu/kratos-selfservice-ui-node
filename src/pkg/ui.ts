@@ -7,7 +7,7 @@ type NavigationMenuProps = {
   navTitle: string
   session?: Session
   logoutUrl?: string
-  selectedLink?: "welcome" | "sessions"
+  selectedLink?: "welcome" | "projects"
 }
 /**
  * Renders the navigation bar with state
@@ -28,12 +28,12 @@ export const navigationMenu = ({
       iconLeft: "house",
       selected: false,
     },
-    {
-      name: "Session Information",
-      href: "sessions",
-      iconLeft: "users-viewfinder",
-      selected: false,
-    },
+    // {
+    //   name: "Session Information",
+    //   href: "projects",
+    //   iconLeft: "users-viewfinder",
+    //   selected: false,
+    // },
   ].map((link) => {
     if (selectedLink && link.href.includes(selectedLink)) {
       link.selected = true
@@ -49,8 +49,8 @@ export const navigationMenu = ({
         links: links,
       },
       {
-        title: "Default User Interfaces",
-        titleIcon: "circle-question",
+        title: "Authentication actions",
+        // titleIcon: "circle-question",
         links: [
           {
             name: "Sign In",
@@ -70,24 +70,24 @@ export const navigationMenu = ({
             testId: "registration",
             target: "_blank",
           },
-          {
-            name: "Account Recovery",
-            href: "recovery",
-            iconLeft: "user-xmark",
-            iconRight: "up-right-from-square",
-            disabled: Boolean(session),
-            testId: "recovery",
-            target: "_blank",
-          },
-          {
-            name: "Account Verification",
-            href: "verification",
-            iconLeft: "user-check",
-            iconRight: "up-right-from-square",
-            disabled: false,
-            testId: "verification",
-            target: "_blank",
-          },
+          // {
+          //   name: "Account Recovery",
+          //   href: "recovery",
+          //   iconLeft: "user-xmark",
+          //   iconRight: "up-right-from-square",
+          //   disabled: Boolean(session),
+          //   testId: "recovery",
+          //   target: "_blank",
+          // },
+          // {
+          //   name: "Account Verification",
+          //   href: "verification",
+          //   iconLeft: "user-check",
+          //   iconRight: "up-right-from-square",
+          //   disabled: false,
+          //   testId: "verification",
+          //   target: "_blank",
+          // },
           {
             name: "Account Settings",
             href: "settings",

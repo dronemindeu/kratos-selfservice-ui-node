@@ -1,7 +1,9 @@
 // Copyright © 2022 Ory Corp
 // SPDX-License-Identifier: Apache-2.0
+import { Session } from "@ory/client"
 import {
   defaultConfig,
+  requireAuth,
   RouteCreator,
   RouteRegistrator,
   setSession,
@@ -9,15 +11,56 @@ import {
 import { navigationMenu } from "../pkg/ui"
 import { CardGradient, Typography } from "@ory/elements-markup"
 
+const videoShareURL = process.env.VIDEO_SHARE_URL ?? "https://videoshare.autrik.com/"
+const autrikosAssetsURL = process.env.AUTRIKOS_ASSETS_URL ?? "https://autrik.com/api/public/assets/"
+const autrikosDocsURL = process.env.AUTRIKOS_DOCS_URL ?? "https://autrik.com/docs/"
+// export VIDEO_SHARE_URL="https://videoshare.autrik-staging.com/"
+// export AUTRIKOS_ASSETS_URL="https://autrik-staging.com/api/public/assets/"
+// export AUTRIKOS_DOCS_URL="https://autrik-staging.com/docs/"
+const getConceptsByRole = () => {
+  let concepts = [
+    CardGradient({
+      heading: "Video Streaming",
+      content:
+        "Share your device's Video Stream to the AutrikOS Dashboard.",
+      action:
+        videoShareURL,
+      target: "_blank",
+    }),
+  ]
+  concepts.push(
+    CardGradient({
+      heading: "Downloads",
+      content:
+        "Download the AutrikOS assets.",
+      action:
+        autrikosAssetsURL,
+      target: "_blank",
+    }),
+  )
+  concepts.push(
+    CardGradient({
+      heading: "Documentation",
+      content:
+        "Read the AutrikOS documentation.",
+      action:
+        autrikosDocsURL,
+      target: "_blank",
+    }),
+  )
+  return concepts
+}
+
 export const createWelcomeRoute: RouteCreator =
   (createHelpers) => async (req, res) => {
-    res.locals.projectName = "Welcome to Ory"
+    res.locals.projectName = "Welcome to AutrikOS"
 
     const { frontend } = createHelpers(req, res)
     const session = req.session
     const { return_to } = req.query
-
+    const activeSession = session === undefined ? false : true
     // Create a logout URL
+    const concepts = getConceptsByRole()
     const logoutUrl =
       (
         await frontend
@@ -37,53 +80,12 @@ export const createWelcomeRoute: RouteCreator =
         selectedLink: "welcome",
       }),
       projectInfoText: Typography({
-        children: `Your Ory Account Experience is running at ${req.header(
-          "host",
-        )}.`,
+        children: `You are on the AutrikOS platform.`,
         type: "regular",
         size: "small",
         color: "foregroundMuted",
       }),
-      concepts: [
-        CardGradient({
-          heading: "Getting Started",
-          content:
-            "Jump start your project and complete the quickstart tutorial to get a broader overview of Ory Network.",
-          action:
-            "https://www.ory.sh/docs/getting-started/integrate-auth/expressjs",
-          target: "_blank",
-        }),
-        CardGradient({
-          heading: "User flows",
-          content:
-            "Implement flows that users perform themselves as opposed to administrative intervention.",
-          action: "https://www.ory.sh/docs/kratos/self-service",
-          target: "_blank",
-        }),
-        CardGradient({
-          heading: "Identities 101",
-          content:
-            "Every identity can have its own model - get to know the ins and outs of Identity Schemas.",
-          action:
-            "https://www.ory.sh/docs/kratos/manage-identities/identity-schema",
-          target: "_blank",
-        }),
-        CardGradient({
-          heading: "Sessions",
-          content:
-            "Ory Network manages sessions for you - get to know how sessions work.",
-          action: "https://www.ory.sh/docs/kratos/session-management/overview",
-          target: "_blank",
-        }),
-        CardGradient({
-          heading: "Custom UI",
-          content:
-            "Implementing these pages in your language and framework of choice is straightforward using our SDKs.",
-          action:
-            "https://www.ory.sh/docs/kratos/bring-your-own-ui/configure-ory-to-use-your-ui",
-          target: "_blank",
-        }),
-      ].join("\n"),
+      concepts: concepts,
     })
   }
 
@@ -92,5 +94,5 @@ export const registerWelcomeRoute: RouteRegistrator = (
   createHelpers = defaultConfig,
   route = "/welcome",
 ) => {
-  app.get(route, setSession(createHelpers), createWelcomeRoute(createHelpers))
+  app.get(route, requireAuth(createHelpers), createWelcomeRoute(createHelpers))
 }

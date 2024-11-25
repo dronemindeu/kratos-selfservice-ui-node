@@ -88,7 +88,7 @@ export const createSessionsRoute: RouteCreator =
         navTitle: res.locals.projectName,
         session,
         logoutUrl,
-        selectedLink: "sessions",
+        selectedLink: "projects",
       }),
     })
   }
@@ -96,7 +96,7 @@ export const createSessionsRoute: RouteCreator =
 export const registerSessionsRoute: RouteRegistrator = (
   app,
   createHelpers = defaultConfig,
-  route = "/sessions",
+  route = "/projects",
 ) => {
   app.get(route, requireAuth(createHelpers), createSessionsRoute(createHelpers))
 }

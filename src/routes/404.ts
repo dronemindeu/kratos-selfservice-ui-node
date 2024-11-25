@@ -9,7 +9,7 @@ export const register404Route: RouteRegistrator = (app, createHelpers) => {
       card: UserErrorCard({
         title: "404 - Page not found",
         cardImage: createHelpers?.(req, res).logoUrl,
-        backUrl: "sessions",
+        backUrl: "login",
         error: {
           id: "404",
           error: {
